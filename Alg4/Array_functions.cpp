@@ -78,9 +78,6 @@ void Array::quicksort(size_t left, size_t right) {
 			point = left;
 			left = left_prim;
 			right = right_prim;
-			cout << endl;
-			print();
-			cout << endl;
 			if (left < point)
 				QuickSort(left, point - 1);
 			if (right > point)
