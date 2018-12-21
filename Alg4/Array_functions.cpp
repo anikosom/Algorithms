@@ -44,7 +44,12 @@ int Array::BinarySearch(int key) {
 	}
 	else throw out_of_range("Array is empty");
 }
-void Array::QuickSort(size_t left, size_t right) {
+void Array::QuickSort() {
+	size_t left = 0;
+	size_t right = size - 1;
+	quick_sort(left, right);
+}
+void Array::quicksort(size_t left, size_t right) {
 	if (left > size - 1 || right > size - 1)
 		throw out_of_range("Incorrect input");
 		if (get_size() != 0) {
