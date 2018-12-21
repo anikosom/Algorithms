@@ -13,7 +13,7 @@ int main()
 	arr.print();
 	cout << endl;
 	//cout << arr.BinarySearch(3) << endl;
-	//arr.QuickSort(0, arr.get_size() - 1);
+	//arr.QuickSort();
 	arr.BubbleSort();
 	//arr.HeapSort();
 	//arr.BogoSort();
