@@ -7,8 +7,13 @@ using namespace std;
 Array::~Array(){
 	size = 0;
 }
-Array::Array(size_t elements) {
+Array::Array(size_t elements, int * arr) {
 	size = elements;
+	array = arr;
+}
+Array::Array(size_t elements, char * arr) {
+	size = elements;
+	char_array = arr;
 }
 size_t Array::get_size() {
 	return size;
@@ -79,9 +84,9 @@ void Array::quicksort(size_t left, size_t right) {
 			left = left_prim;
 			right = right_prim;
 			if (left < point)
-				QuickSort(left, point - 1);
+				quicksort(left, point - 1);
 			if (right > point)
-				QuickSort(point + 1, right);
+				quicksort(point + 1, right);
 		}
 		else throw out_of_range("Array is empty");
 }
