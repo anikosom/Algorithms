@@ -31,11 +31,11 @@ bool Heap::is_empty() {
 	else return false;
 }
 void Heap::insert(int key) {
-	array.push_back(key);   // в конец добавляется элемент
+	array.push_back(key);   // Гў ГЄГ®Г­ГҐГ¶ Г¤Г®ГЎГ ГўГ«ГїГҐГІГ±Гї ГЅГ«ГҐГ¬ГҐГ­ГІ
 	size_t i;
 	i = size() - 1;
 	array[i] = key;
-	while (((i - 1) / 2) >= 0 && i > 0) { //он поднимается наверх, пока его значение больше значения родителя
+	while (((i - 1) / 2) >= 0 && i > 0) { //Г®Г­ ГЇГ®Г¤Г­ГЁГ¬Г ГҐГІГ±Гї Г­Г ГўГҐГ°Гµ, ГЇГ®ГЄГ  ГҐГЈГ® Г§Г­Г Г·ГҐГ­ГЁГҐ ГЎГ®Г«ГјГёГҐ Г§Г­Г Г·ГҐГ­ГЁГї Г°Г®Г¤ГЁГІГҐГ«Гї
 		if (array[i] > array[(i - 1) / 2]) {
 			int temp = array[i];
 			array[i] = array[(i - 1) / 2];
@@ -47,11 +47,11 @@ void Heap::insert(int key) {
 void Heap::remove(int key){
 	if (is_empty())
 		throw out_of_range("Array is empty");
-	int index = array.contains(key); // проверяем, есть ли такой элемент в куче
+	int index = array.contains(key); // ГЇГ°Г®ГўГҐГ°ГїГҐГ¬, ГҐГ±ГІГј Г«ГЁ ГІГ ГЄГ®Г© ГЅГ«ГҐГ¬ГҐГ­ГІ Гў ГЄГіГ·ГҐ
 	if (index >= 0) {
-		array[index] = array[size() - 1];  // на его место вставляем последний элемент освобождаем его место
+		array[index] = array[size() - 1];  // Г­Г  ГҐГЈГ® Г¬ГҐГ±ГІГ® ГўГ±ГІГ ГўГ«ГїГҐГ¬ ГЇГ®Г±Г«ГҐГ¤Г­ГЁГ© ГЅГ«ГҐГ¬ГҐГ­ГІ Г®Г±ГўГ®ГЎГ®Г¦Г¤Г ГҐГ¬ ГҐГЈГ® Г¬ГҐГ±ГІГ®
 		array.pop_back();
-		HeapSort();    // упорядочиваем массив согласно свойствам кучи
+		MoveDown(index, array.size() - 1);    // ГіГЇГ®Г°ГїГ¤Г®Г·ГЁГўГ ГҐГ¬ Г¬Г Г±Г±ГЁГў Г±Г®ГЈГ«Г Г±Г­Г® Г±ГўГ®Г©Г±ГІГўГ Г¬ ГЄГіГ·ГЁ
 	}
 }
 bool Heap::contains(int key) {
@@ -61,7 +61,7 @@ bool Heap::contains(int key) {
 		return true;
 	else return false;
 }
-void Heap::MoveDown(int root, int bottom)  //если значение потомка больше значения родителя, они меняются местами
+void Heap::MoveDown(int root, int bottom)  //ГҐГ±Г«ГЁ Г§Г­Г Г·ГҐГ­ГЁГҐ ГЇГ®ГІГ®Г¬ГЄГ  ГЎГ®Г«ГјГёГҐ Г§Г­Г Г·ГҐГ­ГЁГї Г°Г®Г¤ГЁГІГҐГ«Гї, Г®Г­ГЁ Г¬ГҐГ­ГїГѕГІГ±Гї Г¬ГҐГ±ГІГ Г¬ГЁ
 {
 	int max_child;
 	int done = 0;
@@ -85,7 +85,7 @@ void Heap::MoveDown(int root, int bottom)  //если значение потомка больше значен
 			done = 1;
 	}
 }
-void Heap::HeapSort() // упорядочивание массива по свойствам кучи
+void Heap::HeapSort() // ГіГЇГ®Г°ГїГ¤Г®Г·ГЁГўГ Г­ГЁГҐ Г¬Г Г±Г±ГЁГўГ  ГЇГ® Г±ГўГ®Г©Г±ГІГўГ Г¬ ГЄГіГ·ГЁ
 {
 	if (array.size() == 0) 
 		throw out_of_range("Array is empty");
@@ -97,34 +97,34 @@ void Heap::print_to_console() {
 		throw out_of_range("Array is empty");
 	cout << endl;
 	size_t index = 0;
-	size_t num_levels = floor(log2(array.size()));  //расчет количества уровнень
-	size_t cur_level = num_levels;  //текущий уровень, для удобства расчетов нумерация идет в обратном порядке
+	size_t num_levels = floor(log2(array.size()));  //Г°Г Г±Г·ГҐГІ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ  ГіГ°Г®ГўГ­ГҐГ­Гј
+	size_t cur_level = num_levels;  //ГІГҐГЄГіГ№ГЁГ© ГіГ°Г®ГўГҐГ­Гј, Г¤Г«Гї ГіГ¤Г®ГЎГ±ГІГўГ  Г°Г Г±Г·ГҐГІГ®Гў Г­ГіГ¬ГҐГ°Г Г¶ГЁГї ГЁГ¤ГҐГІ Гў Г®ГЎГ°Г ГІГ­Г®Г¬ ГЇГ®Г°ГїГ¤ГЄГҐ
 	for (size_t i = 0; i <= num_levels; i++) {
-		size_t spaces = pow(2, cur_level) - 1;  //расчет количества пробелов
+		size_t spaces = pow(2, cur_level) - 1;  //Г°Г Г±Г·ГҐГІ ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ  ГЇГ°Г®ГЎГҐГ«Г®Гў
 		for (size_t j = 0; j < pow(2, i); j++) {
 			cout << " ";
 			for (size_t k = 0; k < spaces; k++) {
-				if (k >= spaces / 2 && (index * 2 + 1) < size())   // если есть потомки, выводятся ветки слева от элемента
+				if (k >= spaces / 2 && (index * 2 + 1) < size())   // ГҐГ±Г«ГЁ ГҐГ±ГІГј ГЇГ®ГІГ®Г¬ГЄГЁ, ГўГ»ГўГ®Г¤ГїГІГ±Гї ГўГҐГІГЄГЁ Г±Г«ГҐГўГ  Г®ГІ ГЅГ«ГҐГ¬ГҐГ­ГІГ 
 					cout << "_";
 				else cout << " ";
 			}
 			if (index < array.size()) {
-				cout << array[index];  // вывод элемента кучи
+				cout << array[index];  // ГўГ»ГўГ®Г¤ ГЅГ«ГҐГ¬ГҐГ­ГІГ  ГЄГіГ·ГЁ
 				index++;
 			}
 			else return;
 			for (size_t k = 0; k < spaces; k++) {
-				if (k <= spaces / 2 && (index * 2) < size()) //// если есть потомки, выводятся ветки справа от элемента
+				if (k <= spaces / 2 && (index * 2) < size()) //// ГҐГ±Г«ГЁ ГҐГ±ГІГј ГЇГ®ГІГ®Г¬ГЄГЁ, ГўГ»ГўГ®Г¤ГїГІГ±Гї ГўГҐГІГЄГЁ Г±ГЇГ°Г ГўГ  Г®ГІ ГЅГ«ГҐГ¬ГҐГ­ГІГ 
 					cout << "_";
 				else cout << " ";
 			}
 
 		}
 		cout << endl;
-		cur_level--;  //переход на следующий уровень
+		cur_level--;  //ГЇГҐГ°ГҐГµГ®Г¤ Г­Г  Г±Г«ГҐГ¤ГіГѕГ№ГЁГ© ГіГ°Г®ГўГҐГ­Гј
 	}
 }
-//обход в глубину
+//Г®ГЎГµГ®Г¤ Гў ГЈГ«ГіГЎГЁГ­Гі
 Heap::HeapDFTIterator::HeapDFTIterator(Vector itHeapVector)
 {
 	heapVector = itHeapVector;
@@ -139,26 +139,26 @@ int Heap::HeapDFTIterator::next()
 		return heapVector[0];
 	}
 	size_t temp = curIndex;
-	if (curIndex % 2 != 0 ) {   //если индекс элемента нечетный
+	if (curIndex % 2 != 0 ) {   //ГҐГ±Г«ГЁ ГЁГ­Г¤ГҐГЄГ± ГЅГ«ГҐГ¬ГҐГ­ГІГ  Г­ГҐГ·ГҐГІГ­Г»Г©
 		if (curIndex + 1 < heapVector.size()) {
-			stack.push_back(curIndex + 1);  //записываем в стек его соседний правый элемент, если он есть
+			stack.push_back(curIndex + 1);  //Г§Г ГЇГЁГ±Г»ГўГ ГҐГ¬ Гў Г±ГІГҐГЄ ГҐГЈГ® Г±Г®Г±ГҐГ¤Г­ГЁГ© ГЇГ°Г ГўГ»Г© ГЅГ«ГҐГ¬ГҐГ­ГІ, ГҐГ±Г«ГЁ Г®Г­ ГҐГ±ГІГј
 		}
-		curIndex = curIndex * 2 + 1;  //пытаемся перейти к потомку
+		curIndex = curIndex * 2 + 1;  //ГЇГ»ГІГ ГҐГ¬Г±Гї ГЇГҐГ°ГҐГ©ГІГЁ ГЄ ГЇГ®ГІГ®Г¬ГЄГі
 		if (curIndex > heapVector.size() - 1) {
-			curIndex = temp + 1;  //если потомка нет, пытаемся перейти к соседнему элементу
+			curIndex = temp + 1;  //ГҐГ±Г«ГЁ ГЇГ®ГІГ®Г¬ГЄГ  Г­ГҐГІ, ГЇГ»ГІГ ГҐГ¬Г±Гї ГЇГҐГ°ГҐГ©ГІГЁ ГЄ Г±Г®Г±ГҐГ¤Г­ГҐГ¬Гі ГЅГ«ГҐГ¬ГҐГ­ГІГі
 			if (curIndex > heapVector.size() - 1) {
 					if (stack.size() != 0) {
-						curIndex = stack[stack.size() - 1];  // если элемент был последним, переходим к последнему элементу из стека
+						curIndex = stack[stack.size() - 1];  // ГҐГ±Г«ГЁ ГЅГ«ГҐГ¬ГҐГ­ГІ ГЎГ»Г« ГЇГ®Г±Г«ГҐГ¤Г­ГЁГ¬, ГЇГҐГ°ГҐГµГ®Г¤ГЁГ¬ ГЄ ГЇГ®Г±Г«ГҐГ¤Г­ГҐГ¬Гі ГЅГ«ГҐГ¬ГҐГ­ГІГі ГЁГ§ Г±ГІГҐГЄГ 
 						stack.pop_back(); 
 					}
 					else curIndex = curIndex * 2 + 1;
 			}
 		}
 	}
-	else {                                   //если индекс четный
-		curIndex = curIndex * 2 + 1;         //пытаемся перейти к потомку
+	else {                                   //ГҐГ±Г«ГЁ ГЁГ­Г¤ГҐГЄГ± Г·ГҐГІГ­Г»Г©
+		curIndex = curIndex * 2 + 1;         //ГЇГ»ГІГ ГҐГ¬Г±Гї ГЇГҐГ°ГҐГ©ГІГЁ ГЄ ГЇГ®ГІГ®Г¬ГЄГі
 
-		if (curIndex > heapVector.size() - 1) {  //если потомка нет, переходим к элементу из стека
+		if (curIndex > heapVector.size() - 1) {  //ГҐГ±Г«ГЁ ГЇГ®ГІГ®Г¬ГЄГ  Г­ГҐГІ, ГЇГҐГ°ГҐГµГ®Г¤ГЁГ¬ ГЄ ГЅГ«ГҐГ¬ГҐГ­ГІГі ГЁГ§ Г±ГІГҐГЄГ 
 			stack.pop_back();
 			if (stack.size() != 0) {
 				curIndex = stack[stack.size() - 1];
