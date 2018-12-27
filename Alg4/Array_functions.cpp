@@ -5,6 +5,8 @@
 
 using namespace std;
 Array::~Array(){
+	delete[] array;
+	delete[] char_array;
 	size = 0;
 }
 Array::Array(size_t elements, int * arr) {
